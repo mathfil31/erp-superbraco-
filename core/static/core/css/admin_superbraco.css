@@ -1,0 +1,140 @@
+:root {
+    --primary: #F28C28;
+    --secondary: #C96D13;
+    --accent: #FFF0DF;
+    --primary-fg: #FFFFFF;
+
+    --header-bg: #F28C28;
+    --header-color: #FFFFFF;
+    --header-branding-color: #FFFFFF;
+    --header-link-color: #FFFFFF;
+
+    --breadcrumbs-bg: #C96D13;
+    --breadcrumbs-fg: #FFFFFF;
+    --breadcrumbs-link-fg: #FFFFFF;
+
+    --link-fg: #C96D13;
+    --link-hover-color: #954800;
+    --link-selected-fg: #FFFFFF;
+
+    --button-bg: #F28C28;
+    --button-fg: #FFFFFF;
+    --button-hover-bg: #D97716;
+
+    --default-button-bg: #C96D13;
+    --default-button-hover-bg: #A94F08;
+
+    --body-bg: #F4F6F9;
+    --body-fg: #263442;
+    --selected-bg: #FFF0DF;
+    --selected-row: #FFF0DF;
+}
+
+body {
+    background-color: #F4F6F9;
+}
+
+#header {
+    background: #F28C28;
+    color: #FFFFFF;
+}
+
+#header a:link,
+#header a:visited,
+#branding h1 a:link,
+#branding h1 a:visited {
+    color: #FFFFFF;
+}
+
+#header a:hover,
+#branding h1 a:hover {
+    color: #FFF0DF;
+}
+
+#branding h1 {
+    font-weight: 700;
+}
+
+div.breadcrumbs {
+    background: #C96D13;
+    color: #FFFFFF;
+}
+
+div.breadcrumbs a:link,
+div.breadcrumbs a:visited {
+    color: #FFFFFF;
+}
+
+a:link,
+a:visited {
+    color: #C96D13;
+}
+
+a:hover {
+    color: #954800;
+}
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button,
+.object-tools a {
+    background: #F28C28;
+    color: #FFFFFF;
+    border-color: #F28C28;
+    border-radius: 6px;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover,
+a.button:hover,
+.object-tools a:hover {
+    background: #C96D13;
+    color: #FFFFFF;
+}
+
+.button.default,
+input[type="submit"].default,
+.submit-row input.default {
+    background: #C96D13;
+    color: #FFFFFF;
+}
+
+.module h2,
+.module caption,
+.inline-group h2,
+#changelist-filter h2 {
+    background: #F28C28;
+    color: #FFFFFF;
+}
+
+#nav-sidebar .current-model {
+    background: #FFF0DF;
+    border-left: 3px solid #F28C28;
+}
+
+#nav-sidebar .current-model a {
+    color: #954800;
+    font-weight: 700;
+}
+
+.selector-chosen h2 {
+    background: #F28C28 !important;
+}
+
+.paginator a:link,
+.paginator a:visited {
+    background: #F28C28;
+    color: #FFFFFF;
+}
+
+.paginator a:hover {
+    background: #C96D13;
+}
+
+.messagelist li.success {
+    border-left-color: #F28C28;
+}
