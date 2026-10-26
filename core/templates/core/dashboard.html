@@ -1,0 +1,851 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Superbraço</title>
+
+    <style>
+        :root {
+            --navy: #183344;
+            --navy-light: #24485c;
+            --orange: #f28c28;
+            --orange-light: #fff0df;
+            --background: #f4f6f9;
+            --white: #ffffff;
+            --text: #263442;
+            --muted: #798695;
+            --border: #e7ebf0;
+            --green: #18865b;
+            --red: #c34444;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .layout {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 245px minmax(0, 1fr);
+        }
+
+        .sidebar {
+            background: var(--navy);
+            color: white;
+            padding: 28px 18px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 8px 30px;
+            border-bottom: 1px solid #355064;
+        }
+
+        .brand-mark {
+            width: 43px;
+            height: 43px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: var(--orange);
+            color: white;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .brand-name {
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .brand-subtitle {
+            color: #b9cbd5;
+            font-size: 10px;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        .nav-label {
+            color: #9bb0bd;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin: 30px 10px 12px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 12px;
+            margin-bottom: 6px;
+            border-radius: 9px;
+            color: #d8e2e8;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--navy-light);
+            color: white;
+        }
+
+        .nav-link.active {
+            border-left: 3px solid var(--orange);
+        }
+
+        .nav-symbol {
+            width: 23px;
+            text-align: center;
+            color: #ffc17e;
+            font-weight: 800;
+        }
+
+        .sidebar-footer {
+            margin: 45px 8px 0;
+            padding-top: 18px;
+            border-top: 1px solid #355064;
+            color: #b9cbd5;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .main {
+            min-width: 0;
+            padding: 30px 34px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .eyebrow {
+            color: var(--orange);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        h1 {
+            margin: 7px 0;
+            font-size: 28px;
+            letter-spacing: -.7px;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .top-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            background: white;
+        }
+
+        .button-primary {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: white;
+        }
+
+        .button:hover {
+            filter: brightness(.97);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 28px 0 15px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .section-heading a,
+        .text-link {
+            color: #d97716;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            padding: 21px;
+            min-width: 0;
+            box-shadow: 0 3px 12px rgba(24, 51, 68, .025);
+        }
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .stat-icon {
+            display: grid;
+            place-items: center;
+            width: 37px;
+            height: 37px;
+            border-radius: 10px;
+            background: var(--orange-light);
+            color: #c96d13;
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .stat-value {
+            font-size: 27px;
+            font-weight: 750;
+            margin-top: 15px;
+            letter-spacing: -.6px;
+            overflow-wrap: anywhere;
+        }
+
+        .stat-note {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(270px, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .panel {
+            min-width: 0;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-header h2 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .panel-header p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th {
+            background: #fafbfc;
+            color: var(--muted);
+            text-align: left;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding: 13px 15px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 15px;
+            border-top: 1px solid #f0f2f5;
+            white-space: nowrap;
+        }
+
+        .primary-cell {
+            font-weight: 700;
+        }
+
+        .secondary-cell {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 9px;
+            border-radius: 20px;
+            background: #f0f2f5;
+            color: #536170;
+            font-size: 10px;
+            font-weight: 750;
+        }
+
+        .status-pending {
+            color: #a56311;
+            background: #fff0d8;
+        }
+
+        .status-received {
+            color: var(--green);
+            background: #e3f5ec;
+        }
+
+        .status-cancelled {
+            color: var(--red);
+            background: #fde9e9;
+        }
+
+        .movement-list {
+            padding: 5px 20px;
+        }
+
+        .movement {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 0;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .movement:last-child {
+            border-bottom: 0;
+        }
+
+        .movement-icon {
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            color: var(--green);
+            background: #e3f5ec;
+            font-weight: 800;
+        }
+
+        .movement-icon.out {
+            color: var(--red);
+            background: #fde9e9;
+        }
+
+        .movement-icon.adjust {
+            color: #a56311;
+            background: #fff0d8;
+        }
+
+        .movement-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .movement-name {
+            font-size: 12px;
+            font-weight: 750;
+            overflow-wrap: anywhere;
+        }
+
+        .movement-detail {
+            color: var(--muted);
+            margin-top: 5px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .empty-state {
+            padding: 30px 18px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            margin-top: 18px;
+        }
+
+        .quick-card {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 17px;
+            transition: .2s;
+        }
+
+        .quick-card:hover {
+            border-color: #f5b56c;
+            transform: translateY(-2px);
+        }
+
+        .quick-icon {
+            display: grid;
+            place-items: center;
+            width: 39px;
+            height: 39px;
+            border-radius: 10px;
+            background: var(--orange-light);
+            color: #c96d13;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .quick-title {
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .quick-desc {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        @media (max-width: 1150px) {
+            .stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                padding: 18px;
+            }
+
+            .brand {
+                padding-bottom: 16px;
+            }
+
+            .nav-label,
+            .sidebar-footer {
+                display: none;
+            }
+
+            .sidebar nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+                margin-top: 15px;
+            }
+
+            .nav-link {
+                padding: 10px;
+                margin: 0;
+            }
+
+            .main {
+                padding: 22px 15px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+                margin-bottom: 22px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .stats {
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-value {
+                font-size: 22px;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">S</div>
+            <div>
+                <div class="brand-name">SUPERBRAÇO</div>
+                <div class="brand-subtitle">GESTÃO DE SUPRIMENTOS</div>
+            </div>
+        </div>
+
+        <div class="nav-label">MENU PRINCIPAL</div>
+
+        <nav>
+            <a class="nav-link active" href="/">
+                <span class="nav-symbol">▦</span>
+                Dashboard
+            </a>
+
+            <a class="nav-link"
+               href="{% url 'admin:core_produto_changelist' %}">
+                <span class="nav-symbol">P</span>
+                Produtos e estoque
+            </a>
+
+            <a class="nav-link"
+               href="{% url 'admin:core_compra_changelist' %}">
+                <span class="nav-symbol">C</span>
+                Compras
+            </a>
+
+            <a class="nav-link"
+               href="{% url 'admin:core_movimentacaoestoque_changelist' %}">
+                <span class="nav-symbol">↕</span>
+                Movimentações
+            </a>
+
+            <a class="nav-link" href="/admin/">
+                <span class="nav-symbol">⚙</span>
+                Administração
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <strong>BGL-1</strong><br>
+            Gestão de materiais e suprimentos<br>
+            Superbraço
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div>
+                <div class="eyebrow">CENTRAL DE OPERAÇÕES</div>
+                <h1>Painel de controle</h1>
+                <div class="subtitle">
+                    Acompanhe compras, estoque e movimentações da BGL-1.
+                </div>
+            </div>
+
+            <div class="top-actions">
+                <a class="button"
+                   href="{% url 'admin:core_produto_add' %}">
+                    + Novo produto
+                </a>
+                <a class="button button-primary"
+                   href="{% url 'admin:core_compra_add' %}">
+                    + Nova compra
+                </a>
+            </div>
+        </header>
+
+        <div class="section-heading">
+            <h2>Resumo operacional</h2>
+            <span class="subtitle">{% now "d/m/Y" %}</span>
+        </div>
+
+        <section class="stats">
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Produtos ativos</span>
+                    <span class="stat-icon">P</span>
+                </div>
+                <div class="stat-value">{{ total_produtos }}</div>
+                <div class="stat-note">Itens cadastrados no sistema</div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Unidades em estoque</span>
+                    <span class="stat-icon">E</span>
+                </div>
+                <div class="stat-value">{{ total_unidades|floatformat:2 }}</div>
+                <div class="stat-note">Saldo dos produtos ativos</div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Valor estimado do estoque</span>
+                    <span class="stat-icon">$</span>
+                </div>
+                <div class="stat-value">
+                    R$ {{ valor_estoque|floatformat:2 }}
+                </div>
+                <div class="stat-note">Estimativa pelo custo unitário cadastrado</div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Estoque baixo</span>
+                    <span class="stat-icon">!</span>
+                </div>
+                <div class="stat-value">{{ produtos_baixo_estoque }}</div>
+                <div class="stat-note">Produtos no mínimo ou abaixo dele</div>
+            </article>
+        </section>
+
+        <div class="section-heading">
+            <h2>Compras e movimentações</h2>
+        </div>
+
+        <section class="stats" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Pedidos de compra</span>
+                    <span class="stat-icon">C</span>
+                </div>
+                <div class="stat-value">{{ total_compras }}</div>
+                <div class="stat-note">
+                    Total de pedidos registrados
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Compras pendentes</span>
+                    <span class="stat-icon">…</span>
+                </div>
+                <div class="stat-value">{{ compras_pendentes }}</div>
+                <div class="stat-note">
+                    Pedidos aguardando recebimento
+                </div>
+            </article>
+        </section>
+
+        <section class="content-grid">
+            <article class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Compras recentes</h2>
+                        <p>Últimos pedidos registrados no sistema</p>
+                    </div>
+                    <a class="text-link"
+                       href="{% url 'admin:core_compra_changelist' %}">
+                        Ver todas
+                    </a>
+                </div>
+
+                {% if compras_recentes %}
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pedido / fornecedor</th>
+                                    <th>Data</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for compra in compras_recentes %}
+                                    <tr>
+                                        <td>
+                                            <div class="primary-cell">
+                                                {{ compra.numero }}
+                                            </div>
+                                            <div class="secondary-cell">
+                                                {{ compra.fornecedor }}
+                                            </div>
+                                        </td>
+                                        <td>{{ compra.data_pedido|date:"d/m/Y" }}</td>
+                                        <td>
+                                            {% if compra.status == "PENDENTE" %}
+                                                <span class="status status-pending">
+                                                    Pendente
+                                                </span>
+                                            {% elif compra.status == "RECEBIDA" %}
+                                                <span class="status status-received">
+                                                    Recebida
+                                                </span>
+                                            {% else %}
+                                                <span class="status status-cancelled">
+                                                    Cancelada
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            R$ {{ compra.valor_total|floatformat:2 }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        Nenhuma compra cadastrada.<br>
+                        Utilize o botão “Nova compra” para começar.
+                    </div>
+                {% endif %}
+            </article>
+
+            <article class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Movimentações recentes</h2>
+                        <p>Últimos registros de estoque</p>
+                    </div>
+                    <a class="text-link"
+                       href="{% url 'admin:core_movimentacaoestoque_changelist' %}">
+                        Ver todas
+                    </a>
+                </div>
+
+                {% if movimentacoes_recentes %}
+                    <div class="movement-list">
+                        {% for movimento in movimentacoes_recentes %}
+                            <div class="movement">
+                                {% if movimento.tipo == "ENTRADA" %}
+                                    <div class="movement-icon">+</div>
+                                {% elif movimento.tipo == "SAIDA" %}
+                                    <div class="movement-icon out">−</div>
+                                {% else %}
+                                    <div class="movement-icon adjust">=</div>
+                                {% endif %}
+
+                                <div class="movement-info">
+                                    <div class="movement-name">
+                                        {{ movimento.produto.nome }}
+                                    </div>
+                                    <div class="movement-detail">
+                                        {{ movimento.get_tipo_display }}
+                                        · {{ movimento.quantidade|floatformat:2 }}
+                                        {{ movimento.produto.unidade }}<br>
+                                        {{ movimento.criado_em|date:"d/m/Y H:i" }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        Nenhuma movimentação registrada.<br>
+                        As entradas serão exibidas aqui após o recebimento.
+                    </div>
+                {% endif %}
+            </article>
+        </section>
+
+        <div class="section-heading">
+            <h2>Acesso rápido</h2>
+        </div>
+
+        <section class="quick-actions">
+            <a class="quick-card"
+               href="{% url 'admin:core_produto_add' %}">
+                <div class="quick-icon">+</div>
+                <div>
+                    <div class="quick-title">Cadastrar produto</div>
+                    <div class="quick-desc">Adicionar material ao catálogo</div>
+                </div>
+            </a>
+
+            <a class="quick-card"
+               href="{% url 'admin:core_compra_add' %}">
+                <div class="quick-icon">+</div>
+                <div>
+                    <div class="quick-title">Registrar compra</div>
+                    <div class="quick-desc">Criar pedido de fornecimento</div>
+                </div>
+            </a>
+
+            <a class="quick-card"
+               href="{% url 'admin:core_movimentacaoestoque_changelist' %}">
+                <div class="quick-icon">↕</div>
+                <div>
+                    <div class="quick-title">Consultar histórico</div>
+                    <div class="quick-desc">Ver entradas e saídas registradas</div>
+                </div>
+            </a>
+        </section>
+
+        <footer class="footer">
+            Superbraço · Gestão de Compras e Estoque · BGL-1
+        </footer>
+    </main>
+</div>
+</body>
+</html>
